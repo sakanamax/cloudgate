@@ -1,1 +1,1 @@
-# cloudgate
+# For cloud gate use
