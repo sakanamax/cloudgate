@@ -2,4 +2,6 @@
 
 Dockerfile/ - 專案使用 dockerfile
 
-binary/     - Max 打包好的 binary files
+binary/     - 錫恩打包好的 binary files
+
+script/     - 建立 container 的script
