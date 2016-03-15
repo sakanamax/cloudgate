@@ -18,8 +18,25 @@ RUN ssh-keygen -t ed25519 -f /etc/ssh/ssh_host_ed25519_key -N ""
 # Install passwd package
 RUN yum -y install passwd
 
+# Install Gate require packages
+RUN yum -y install  mesa-libGLU   libSM   libXmu wget
+
+# Get binary file
+RUN wget https://github.com/sakanamax/cloudgate/raw/master/binary/gate-bin.tgz
+
+# Extract Binary file
+RUN tar  zxvf gate-bin.tgz  -C  /opt/
+
+# Setting up $PATH and env
+RUN echo "source /opt/gate/root_v5.34.34/bin/thisroot.sh" >> /etc/bashrc
+RUN echo "source /opt/gate/Geant4-10.1.2-Linux/bin/geant4.sh" >> /etc/bashrc
+RUN echo  "export PATH=$PATH:/opt/gate/"  >> /etc/bashrc
+
 # Modify root passwd
 RUN echo "root:newRootpass"|chpasswd
+
+# create user gate
+RUN useradd -m gate && echo "gate:newGatepass"|chpasswd
 
 #expose ports
 EXPOSE 22
