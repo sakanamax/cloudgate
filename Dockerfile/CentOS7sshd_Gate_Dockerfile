@@ -27,6 +27,27 @@ RUN wget https://github.com/sakanamax/cloudgate/raw/master/binary/gate-bin.tgz
 # Extract Binary file
 RUN tar  zxvf gate-bin.tgz  -C  /opt/
 
+# Get Data files
+RUN wget http://geant4.cern.ch/support/source/G4ABLA.3.0.tar.gz && \
+  tar zxvf G4ABLA.3.0.tar.gz -C /opt/gate/Geant4-10.1.2-Linux/share/Geant4-10.1.2/data && \
+  wget http://geant4.cern.ch/support/source/G4NEUTRONXS.1.4.tar.gz && \
+  tar zxvf G4NEUTRONXS.1.4.tar.gz -C /opt/gate/Geant4-10.1.2-Linux/share/Geant4-10.1.2/data && \
+  wget http://geant4.cern.ch/support/source/G4PhotonEvaporation.3.2.tar.gz && \
+  tar zxvf G4PhotonEvaporation.3.2.tar.gz -C /opt/gate/Geant4-10.1.2-Linux/share/Geant4-10.1.2/data && \
+  wget http://geant4.cern.ch/support/source/G4EMLOW.6.48.tar.gz && \
+  tar zxvf G4EMLOW.6.48.tar.gz -C /opt/gate/Geant4-10.1.2-Linux/share/Geant4-10.1.2/data && \
+  wget http://geant4.cern.ch/support/source/G4PII.1.3.tar.gz && \
+  tar zxvf G4PII.1.3.tar.gz -C /opt/gate/Geant4-10.1.2-Linux/share/Geant4-10.1.2/data && \
+  wget http://geant4.cern.ch/support/source/G4RadioactiveDecay.4.3.2.tar.gz && \
+  tar zxvf G4RadioactiveDecay.4.3.2.tar.gz -C /opt/gate/Geant4-10.1.2-Linux/share/Geant4-10.1.2/data && \
+  wget http://geant4.cern.ch/support/source/G4NDL.4.5.tar.gz && \
+  tar zxvf G4NDL.4.5.tar.gz -C /opt/gate/Geant4-10.1.2-Linux/share/Geant4-10.1.2/data && \
+  wget http://geant4.cern.ch/support/source/G4SAIDDATA.1.1.tar.gz && \
+  tar zxvf G4SAIDDATA.1.1.tar.gz -C /opt/gate/Geant4-10.1.2-Linux/share/Geant4-10.1.2/data && \
+  wget http://geant4.cern.ch/support/source/RealSurface.1.0.tar.gz && \
+  tar zxvf RealSurface.1.0.tar.gz -C /opt/gate/Geant4-10.1.2-Linux/share/Geant4-10.1.2/data
+
+
 # Setting up $PATH and env
 RUN echo "source /opt/gate/root_v5.34.34/bin/thisroot.sh" >> /etc/bashrc
 RUN echo "source /opt/gate/Geant4-10.1.2-Linux/bin/geant4.sh" >> /etc/bashrc
