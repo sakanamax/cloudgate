@@ -11,9 +11,9 @@ RUN yum install epel-release -y
 RUN yum -y install openssh-server
 
 # Create SSH key
-RUN ssh-keygen -t rsa  -f /etc/ssh/ssh_host_rsa_key -N ""
-RUN ssh-keygen -t ecdsa  -f /etc/ssh/ssh_host_ecdsa_key -N ""
-RUN ssh-keygen -t ed25519 -f /etc/ssh/ssh_host_ed25519_key -N ""
+RUN ssh-keygen -t rsa  -f /etc/ssh/ssh_host_rsa_key -N "" && \
+    ssh-keygen -t ecdsa  -f /etc/ssh/ssh_host_ecdsa_key -N "" && \
+    ssh-keygen -t ed25519 -f /etc/ssh/ssh_host_ed25519_key -N ""
 
 # Install passwd package
 RUN yum -y install passwd
@@ -28,6 +28,7 @@ RUN wget https://github.com/sakanamax/cloudgate/raw/master/binary/gate-bin.tgz
 RUN tar  zxvf gate-bin.tgz  -C  /opt/
 
 # Get Data files
+# From web http://geant4.web.cern.ch/geant4/support/download.shtml
 RUN wget http://geant4.cern.ch/support/source/G4ABLA.3.0.tar.gz && \
   tar zxvf G4ABLA.3.0.tar.gz -C /opt/gate/Geant4-10.1.2-Linux/share/Geant4-10.1.2/data && \
   wget http://geant4.cern.ch/support/source/G4NEUTRONXS.1.4.tar.gz && \
@@ -47,11 +48,14 @@ RUN wget http://geant4.cern.ch/support/source/G4ABLA.3.0.tar.gz && \
   wget http://geant4.cern.ch/support/source/RealSurface.1.0.tar.gz && \
   tar zxvf RealSurface.1.0.tar.gz -C /opt/gate/Geant4-10.1.2-Linux/share/Geant4-10.1.2/data
 
+# Get example file 
+RUN wget https://github.com/sakanamax/cloudgate/raw/master/Example/Seed_1.tar.gz && \
+  tar zxvf Seed_1.tar.gz -C /opt/gate
 
 # Setting up $PATH and env
-RUN echo "source /opt/gate/root_v5.34.34/bin/thisroot.sh" >> /etc/bashrc
-RUN echo "source /opt/gate/Geant4-10.1.2-Linux/bin/geant4.sh" >> /etc/bashrc
-RUN echo  "export PATH=$PATH:/opt/gate/"  >> /etc/bashrc
+RUN echo "source /opt/gate/root_v5.34.34/bin/thisroot.sh" >> /etc/bashrc && \
+    echo "source /opt/gate/Geant4-10.1.2-Linux/bin/geant4.sh" >> /etc/bashrc && \
+    echo  "export PATH=$PATH:/opt/gate/"  >> /etc/bashrc
 
 # Modify root passwd
 RUN echo "root:newRootpass"|chpasswd
