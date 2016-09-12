@@ -49,6 +49,7 @@ RUN wget http://geant4.cern.ch/support/source/G4ABLA.3.0.tar.gz && \
   tar zxvf RealSurface.1.0.tar.gz -C /opt/gate/Geant4-10.1.2-Linux/share/Geant4-10.1.2/data
 
 # Get example file 
+# 之後可以考慮把 benchSPEC 與 Tomosynthesis_Simulation 放進來
 RUN wget https://github.com/sakanamax/cloudgate/raw/master/Example/Seed_1.tar.gz && \
   tar zxvf Seed_1.tar.gz -C /opt/gate
 
